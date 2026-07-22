@@ -1,0 +1,18 @@
+# Marimo cache and session files
+__marimo__/cache/
+__marimo__/sessions/
+__marimo__/assets/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Environments
+.venv/
+.venv-*/
+
+# IDEs
+.vscode/
+.idea/
+
+.DS_Store
