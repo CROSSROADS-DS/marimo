@@ -1,0 +1,61 @@
+name: Deploy Marimo App to GitHub Pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      notebook_name:
+        description: 'Name of the marimo notebook file to deploy (e.g., example1.py)'
+        required: true
+        default: 'example1.py'
+        type: string
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Marimo
+        run: |
+          python -m pip install --upgrade pip
+          pip install marimo
+          
+      # Dynamically uses the input if manually triggered, otherwise uses the fallback default
+      - name: Export notebook
+        env:
+          NOTEBOOK: ${{ inputs.notebook_name || 'example1.py' }}
+        run: |
+          python -m marimo export html-wasm "$NOTEBOOK" -o path/to/output --mode run
+ 
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: path/to/output
+ 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+ 
+    permissions:
+      pages: write
+      id-token: write
+ 
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages
