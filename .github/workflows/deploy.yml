@@ -2,12 +2,6 @@ name: Deploy Marimo App to GitHub Pages
 
 on:
   workflow_dispatch:
-    inputs:
-      notebook_name:
-        description: 'Name of the marimo notebook file to deploy (e.g., example1.py)'
-        required: true
-        default: 'example1.py'
-        type: string
   push:
     branches:
       - main
@@ -20,29 +14,27 @@ jobs:
       - name: Checkout Source Code Repository
         uses: actions/checkout@v4
         with:
-          repository: 'CROSSROADS-DS/public-modules'
+          repository: 'cjschrader/public-modules'
+          ref: 'python-files'
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
-      - name: Install Marimo
+      - name: Install Marimo and uv
         run: |
           python -m pip install --upgrade pip
-          pip install marimo
+          pip install marimo uv
           
-      # Dynamically uses the input if manually triggered, otherwise uses the fallback default
-      - name: Export notebook
-        env:
-          NOTEBOOK: ${{ inputs.notebook_name || 'example1.py' }}
+      - name: Batch Export Notebooks via Automation Script
         run: |
-          python -m marimo export html-wasm "$NOTEBOOK" -o path/to/output --mode run
+          python scripts/build.py
  
       - name: Upload Pages Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: path/to/output
+          path: _build/html
  
   deploy:
     needs: build

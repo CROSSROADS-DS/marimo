@@ -10,7 +10,12 @@ GitHub Actions will build the approved modules on a personal browser and deploy 
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
+│   └── scripts/
+│       └── build.py
 ├── .gitignore
 ├── .nojekyll
 └── README.md                       
 ```
+
+Generated files are written to:
+```_build\html\notebooks```
