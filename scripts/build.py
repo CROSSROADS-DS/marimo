@@ -43,10 +43,9 @@ def main() -> None:
     
     if not notebooks:
         print(f"Warning: No notebooks found in {COURSES_DIR}")
-        return
-    
-    notebook_path = notebooks[0]
-    target_html_path = OUTPUT / "index.html"
+    else:
+        notebook_path = notebooks[0]
+        target_html_path = OUTPUT / "index.html"
     
     #for notebook_path in notebooks:
      #   relative_path = notebook_path.relative_to(COURSES_DIR)
