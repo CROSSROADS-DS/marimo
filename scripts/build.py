@@ -8,7 +8,7 @@ from pathlib import Path
 # Setup project directories
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "_build" / "html"
-COURSES_DIR = ROOT / "ocean-science-research-analysis"
+COURSES_DIR = ROOT / "public-modules"
 
 
 def executable(name: str) -> str:
