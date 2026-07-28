@@ -13,9 +13,13 @@ jobs:
     steps:
       - name: Checkout Source Code Repository
         uses: actions/checkout@v4
+
+      - name: Checkout public-modules
+        uses: actions/checkout@v4
         with:
           repository: 'cjschrader/public-modules'
           ref: 'python-files'
+          path: public-modules
 
       - name: Set up Python
         uses: actions/setup-python@v5
