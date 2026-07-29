@@ -71,15 +71,18 @@ python -m pip install marimo
 
 ## Files to Marimo notebooks
 ### Converting Jupyter notebooks to Marimo notebooks
-``` marimo convert your_notebook.ipynb -o your_notebook.py
+```bash
+marimo convert your_notebook.ipynb -o your_notebook.py
 ```
 
 ## Converting Python scripts to Marimo notebooks
-``` marimo convert your_script.py -o your_notebook.py
+```bash
+marimo convert your_script.py -o your_notebook.py
 ```
 
 ### Editing Marimo Files
-``` marimo edit your_notebook.py --sandbox
+```bash
+marimo edit your_notebook.py --sandbox
 ```
 
 ### Notes for Marimo Run Mode
@@ -94,7 +97,8 @@ Users will be unable to view ``.show()``. ``.gca`` allows users to view the char
 
 - **Including data**
 Place them in a folder in the same directory as the notebook. The public folder will be copied to the export directory. To construct the path to your data:
-``` path_to_csv = mo.notebook_location() / "public" / "data.csv"
+```bash
+path_to_csv = mo.notebook_location() / "public" / "data.csv"
 df = pl.read_csv(str(path_to_csv))
 df.head()
 ```
