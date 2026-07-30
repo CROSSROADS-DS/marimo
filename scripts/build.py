@@ -43,14 +43,14 @@ def main() -> None:
     
     if not notebooks:
         print(f"Warning: No notebooks found in {COURSES_DIR}")
-    else:
-        notebook_path = notebooks[0]
-        target_html_path = OUTPUT / "index.html"
+    #else:
+       # notebook_path = notebooks[0]
+       # target_html_path = OUTPUT / "index.html"
     
-    #for notebook_path in notebooks:
-     #   relative_path = notebook_path.relative_to(COURSES_DIR)
-      #  target_html_path = marimo_output_dir / relative_path.with_suffix(".html")
-       # target_html_path.parent.mkdir(parents=True, exist_ok=True)
+    for notebook_path in notebooks:
+        relative_path = notebook_path.relative_to(COURSES_DIR)
+        target_html_path = marimo_output_dir / relative_path.with_suffix(".html")
+        target_html_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Build the CLI export command 
         # --mode run: serves the notebook as a clean, interactive app (no code edits allowed)
