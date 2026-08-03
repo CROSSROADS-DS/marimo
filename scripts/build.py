@@ -50,14 +50,14 @@ def main() -> None:
        # notebook_path = notebooks[0]
        # target_html_path = OUTPUT / "index.html"
 
-    ALLOWED_ASSET_DIRS = ["images", "data", "tool_kit"]
+    ALLOWED_ASSET_DIRS = ["images", "data", "tool_library"]
     
     for notebook_path in notebooks:
         relative_path = notebook_path.relative_to(COURSES_DIR)
         target_html_path = marimo_output_dir / relative_path.with_suffix(".html")
         target_html_path.parent.mkdir(parents=True, exist_ok=True)
 
-         notebook_folder = notebook_path.parent
+        notebook_folder = notebook_path.parent
 
         for folder_name in ALLOWED_ASSET_DIRS:
             source_folder = notebook_folder / folder_name
