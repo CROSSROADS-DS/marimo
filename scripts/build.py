@@ -39,7 +39,10 @@ def main() -> None:
     marimo_output_dir.mkdir(parents=True, exist_ok=True)
 
     # Find and batch-export all marimo notebooks (.py files) to WASM HTML
-    notebooks = list(COURSES_DIR.glob("**/*.py"))
+    notebooks = [
+    f for f in COURSES_DIR.glob("**/*.py") 
+    if "tool_library" not in f.name.lower() and "tool_library" not in f.parts
+]
     
     if not notebooks:
         print(f"Warning: No notebooks found in {COURSES_DIR}")
