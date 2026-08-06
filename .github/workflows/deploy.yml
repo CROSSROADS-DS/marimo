@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       modules_ref:
-        description: 'Branch or SHA to checkout from cjschrader/public-modules'
+        description: 'Branch or SHA to checkout from CROSSROADS-DS/public-modules'
         required: false
         default: 'main'
         type: string
@@ -23,8 +23,8 @@ jobs:
       - name: Checkout public-modules
         uses: actions/checkout@v4
         with:
-          repository: 'cjschrader/public-modules'
-          ref: ${{ inputs.modules_ref || 'python-files' }}
+          repository: 'CROSSROADS_DS/public-modules'
+          ref: ${{ inputs.modules_ref || 'main' }}
           path: public-modules
 
       - name: Set up Python
